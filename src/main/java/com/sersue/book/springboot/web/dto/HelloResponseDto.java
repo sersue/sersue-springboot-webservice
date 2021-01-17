@@ -1,5 +1,6 @@
 package com.sersue.book.springboot.web.dto;
-
+//[package:dto]
+//dto : 계층간에 데이터 교환을 위한 객체 (dtos는 영역)
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
