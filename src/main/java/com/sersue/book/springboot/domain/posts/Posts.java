@@ -2,6 +2,7 @@ package com.sersue.book.springboot.domain.posts;
 //[Posts 클래스]
 // 실제 DB의 테이블과 매칭될 클래스 (= Entity 클래스)
 // JPA 를 사용하면 DB에 작업할 경우 실제 쿼리를 날리기보다, Entity 클래스의 수정을 통해 작업
+import com.sersue.book.springboot.domain.BaseTimeEntity;
 import lombok.Getter;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
@@ -18,7 +19,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posts {
+public class Posts extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
