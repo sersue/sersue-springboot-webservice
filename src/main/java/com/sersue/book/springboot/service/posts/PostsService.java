@@ -9,8 +9,11 @@ Spring 웹 계층
 5.DomainModel : 개발대상을 공유할 수 있도록 단순화 시킨 것 --> 비지니스 처리 담당!!!
 */
 
+import com.sersue.book.springboot.domain.posts.Posts;
 import com.sersue.book.springboot.domain.posts.PostsRepository;
 import com.sersue.book.springboot.web.dto.PostSaveRequestDto;
+import com.sersue.book.springboot.web.dto.PostsResponseDto;
+import com.sersue.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,4 +32,20 @@ public class PostsService {
         return postsRepository.save(requestDto.toEntity()).getId();
     }
 
+    @Transactional
+    public Long update(Long id, PostsUpdateRequestDto requestDto){
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(()-> new
+                        IllegalArgumentException("해당 게시글이 없습니다. id="+id));
+        posts.update(requestDto.getTitle(),requestDto.getContent());
+        return id;
+    }
+
+    public PostsResponseDto findById(Long id){
+        Posts entity = postsRepository.findById(id)
+                .orElseThrow(()->new
+                        IllegalArgumentException("해당 게시글이 없습니다. id="+id));
+
+        return new PostsResponseDto(entity);
+    }
 }
