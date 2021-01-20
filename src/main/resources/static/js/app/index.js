@@ -28,3 +28,4 @@ var main = {
         });
         }
     };
+main.init();
