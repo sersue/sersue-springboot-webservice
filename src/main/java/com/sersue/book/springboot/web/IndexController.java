@@ -1,5 +1,5 @@
 package com.sersue.book.springboot.web;
-
+//페이지와 관련된 모든 컨트롤러
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -9,4 +9,10 @@ public class IndexController {
     public String index(){
         return "index";
     }
+
+    @GetMapping("/posts/save")
+    public String postsSave(){
+        return "posts-save";
+    }
+
 }
