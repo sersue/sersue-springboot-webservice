@@ -12,12 +12,15 @@ Spring 웹 계층
 import com.sersue.book.springboot.domain.posts.Posts;
 import com.sersue.book.springboot.domain.posts.PostsRepository;
 import com.sersue.book.springboot.web.dto.PostSaveRequestDto;
+import com.sersue.book.springboot.web.dto.PostsListResponseDto;
 import com.sersue.book.springboot.web.dto.PostsResponseDto;
 import com.sersue.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /*
 * @RequiredArgsConstructor : final이 선언된 모든 필드에 대해 생성자를 생성해 줍니다. -> @Autowired 보다 좋은 객체 주입 받는 방법! = 생성자로 주입받기.
@@ -26,6 +29,7 @@ import javax.transaction.Transactional;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
+
 
     @Transactional
     public Long save(PostSaveRequestDto requestDto){
@@ -40,7 +44,12 @@ public class PostsService {
         posts.update(requestDto.getTitle(),requestDto.getContent());
         return id;
     }
-
+    @Transactional(readOnly=true)
+    public List<PostsListResponseDto> findAllDesc(){
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)//Posts의 stream을 map을 통해 PostsListResponseDto 변환 -> list로 반환
+                .collect(Collectors.toList());
+    }
     public PostsResponseDto findById(Long id){
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(()->new
