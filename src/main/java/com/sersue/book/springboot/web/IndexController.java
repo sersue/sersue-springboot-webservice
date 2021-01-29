@@ -1,5 +1,6 @@
 package com.sersue.book.springboot.web;
 //페이지와 관련된 모든 컨트롤러
+import com.sersue.book.springboot.config.auth.LoginUser;
 import com.sersue.book.springboot.config.auth.dto.SessionUser;
 import com.sersue.book.springboot.service.posts.PostsService;
 import com.sersue.book.springboot.web.dto.PostsListResponseDto;
@@ -19,10 +20,13 @@ public class IndexController {
     private final PostsService postsService;
     private final HttpSession httpSession;
 
-    @GetMapping("/")
-    public String index(Model model){ //Model을 이용해 데이터를 가져오고 view에 데이터를 넘겨 적절한 view를 생성하는 역할.
-        model.addAttribute("posts",postsService.findAllDesc()); //posts,postservice.findalldesc() key,value쌍으로 전달
-        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //로그인 성공시 세션에 SessionUser저장 해 둠
+    @GetMapping("/") //1-1.(코드 개선 )@LogiUser annotaion을 생성하여 어느 컨트롤러든지 @LoginUser만 사용하면 세션 정보를 가져올 수 있게 되었다.
+    public String index(Model model, @LoginUser SessionUser user){ //1. Model을 이용해 데이터를 가져오고 view에 데이터를 넘겨 적절한 view를 생성하는 역할.
+        model.addAttribute("posts",postsService.findAllDesc()); //1. posts,postservice.findalldesc() key,value쌍으로 전달
+//        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //1. 로그인 성공시 세션에 SessionUser저장 해 둠
+
+
+
         //session에 user 있으면
         if(user!=null){
             model.addAttribute("userName",user.getName());

@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.util.Collections;
-
+//구글 로그인 이후 가져온 사용자의 정보들을 기반으로 가입 및 정보수정, 세션 저장 등의 기능을 지원하는 코드
 @RequiredArgsConstructor
 @Service
 public class CustomeOuth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User> {

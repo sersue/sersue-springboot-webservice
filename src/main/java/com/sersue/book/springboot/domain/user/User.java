@@ -24,7 +24,7 @@ public class User {
     @Column
     private String picture;
 
-    @Enumerated(EnumType.STRING)//JPA로 데이터베이스 저장할 때 Enum값을 어떤 형태로 저장할지 결정하는 것.
+    @Enumerated(EnumType.STRING)//JPA로 데이터베이스 저장할 때 Enum값을 어떤 형태로 저장할지 결정하는 것. 기본값은 int 값
     @Column(nullable = false)
     private Role role;
 
