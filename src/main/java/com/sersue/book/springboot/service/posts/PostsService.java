@@ -11,7 +11,7 @@ Spring 웹 계층
 
 import com.sersue.book.springboot.domain.posts.Posts;
 import com.sersue.book.springboot.domain.posts.PostsRepository;
-import com.sersue.book.springboot.web.dto.PostSaveRequestDto;
+import com.sersue.book.springboot.web.dto.PostsSaveRequestDto;
 import com.sersue.book.springboot.web.dto.PostsListResponseDto;
 import com.sersue.book.springboot.web.dto.PostsResponseDto;
 import com.sersue.book.springboot.web.dto.PostsUpdateRequestDto;
@@ -32,7 +32,7 @@ public class PostsService {
 
 
     @Transactional
-    public Long save(PostSaveRequestDto requestDto){
+    public Long save(PostsSaveRequestDto requestDto){
         return postsRepository.save(requestDto.toEntity()).getId();
     }
 

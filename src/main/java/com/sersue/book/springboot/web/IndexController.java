@@ -18,32 +18,35 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
 
-    @GetMapping("/") //1-1.(코드 개선 )@LogiUser annotaion을 생성하여 어느 컨트롤러든지 @LoginUser만 사용하면 세션 정보를 가져올 수 있게 되었다.
-    public String index(Model model, @LoginUser SessionUser user){ //1. Model을 이용해 데이터를 가져오고 view에 데이터를 넘겨 적절한 view를 생성하는 역할.
-        model.addAttribute("posts",postsService.findAllDesc()); //1. posts,postservice.findalldesc() key,value쌍으로 전달
-//        SessionUser user = (SessionUser) httpSession.getAttribute("user"); //1. 로그인 성공시 세션에 SessionUser저장 해 둠
-
-
-
-        //session에 user 있으면
-        if(user!=null){
-            model.addAttribute("userName",user.getName());
+    @GetMapping("/")
+    public String index(Model model, @LoginUser SessionUser user) {
+        model.addAttribute("posts", postsService.findAllDesc());
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+            System.out.println(user.getEmail());
         }
         return "index";
     }
+    //SessionUser user = (SessionUser) httpSession.getAttribute("user");  로그인 성공시 세션에 SessionUser저장 해 둠
+
+//1. Model을 이용해 데이터를 가져오고 view에 데이터를 넘겨 적절한 view를 생성하는 역할.
+//1. posts,postservice.findalldesc() key,value쌍으로 전달
+//1-1.(코드 개선 )@LogiUser annotaion을 생성하여 어느 컨트롤러든지 @LoginUser만 사용하면 세션 정보를 가져올 수 있게 되었다.
+
+    //session에 user 있으면
+
 
     @GetMapping("/posts/save")
-    public String postsSave(){
+    public String postsSave() {
         return "posts-save";
     }
 
     @GetMapping("/posts/update/{id}")
-    public String postsUpdate(@PathVariable Long id,Model model){
+    public String postsUpdate(@PathVariable Long id, Model model) {
         PostsResponseDto dto = postsService.findById(id);
-        model.addAttribute("post",dto);
+        model.addAttribute("post", dto);
+
         return "posts-update";
     }
-
 }

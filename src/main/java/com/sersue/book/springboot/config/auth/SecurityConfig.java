@@ -7,25 +7,27 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
 @RequiredArgsConstructor
-@EnableWebSecurity //spring security 설정 활성화 시켜줌
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final CustomeOuth2UserService customOuth2UserService;
+
+    private final CustomOAuth2UserService customOAuth2UserService;
 
     @Override
-    protected void configure(HttpSecurity http) throws  Exception{
-        http.csrf().disable()
-                .headers().frameOptions().disable() //h2-console화면을 사용하기위한 해당 옵션 disable
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .headers().frameOptions().disable()
                 .and()
-                .authorizeRequests() // URL별 관리를 설정하는 옵션의 시작점  이걸 해야 antMatcher 를 사용할 수 있다.
-                .antMatchers("/","/css/**","/images/**","/js/**","/h2-console/**").permitAll()// 해당 url은 전체 열람 권한
-                .antMatchers("/api/v1/**").hasRole(Role.USER.name())//해당 url은 USER 권한만 가능
-                .anyRequest().authenticated()//설정된값들 이외 나머지 url들은 authenticated- login한 사용자들
+                .authorizeRequests()
+                .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
+                .antMatchers("/api/v1/**").hasRole(Role.USER.name())
+                .anyRequest().authenticated()
                 .and()
-                .logout().logoutSuccessUrl("/")//로그아웃 성공시 "/"
+                .logout()
+                .logoutSuccessUrl("/")
                 .and()
-                .oauth2Login() //로그인 기능에 대한 여러 설정의 진입점
-                .userInfoEndpoint() //로그인 성공이후 사용자 정보를 가져올 때의 설정들을 담당
-                .userService(customOuth2UserService); // 소셜로그인 성공시 후속 조치를 진행할 userService 인터페이스의 구현체를 등록
-        //리소스 서버 (구글 네이버..)에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능을 명시할 수 있다.
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService);
     }
 }
