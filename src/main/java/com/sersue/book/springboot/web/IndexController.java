@@ -3,15 +3,13 @@ package com.sersue.book.springboot.web;
 import com.sersue.book.springboot.config.auth.LoginUser;
 import com.sersue.book.springboot.config.auth.dto.SessionUser;
 import com.sersue.book.springboot.service.posts.PostsService;
-import com.sersue.book.springboot.web.dto.PostsListResponseDto;
+
 import com.sersue.book.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Controller

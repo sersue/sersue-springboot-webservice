@@ -1,5 +1,5 @@
-package com.sersue.book.springboot.web;
 
+package com.sersue.book.springboot.web;
 import com.sersue.book.springboot.service.posts.PostsService;
 import com.sersue.book.springboot.web.dto.PostsListResponseDto;
 import com.sersue.book.springboot.web.dto.PostsSaveRequestDto;
@@ -8,6 +8,8 @@ import com.sersue.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
+// For mockMvc
 
 @RequiredArgsConstructor
 @RestController
