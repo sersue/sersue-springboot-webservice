@@ -24,7 +24,7 @@ before_deploy:
   - mv before-deploy/before-deploy.zip deploy/sersue-springboot-webservice.zip # deploy로 zip파일 이동
 
 deploy:
-  - provider: s3 #s3에 접근해서 build파일 저장 해놓는 코드!
+  - provider: s3
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
     bucket: sersue-springboot-build # S3 버킷
@@ -35,13 +35,13 @@ deploy:
     wait-until-deployed: true
 
   - provider: codedeploy
-    access_key_id: $AWS_ACCESS_KEY
-    secret_access_key: $AWS_SECRET_KEY
-    bucket: sersue-springboot-build
-    key: sersue-springboot-webservice.zip
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: sersue-springboot-build # S3 버킷
+    key: sersue-springboot-webservice.zip # 빌드 파일을 압축해서 전달
     bundle_type: zip
-    application : sersue-springboot-webservice
-    deployment_group : sersue-springboot-webservice-group
+    application: sersue-springboot-webservice # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
+    deployment_group: sersue-springboot-webservice-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed: true
 
