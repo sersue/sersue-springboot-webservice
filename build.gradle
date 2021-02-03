@@ -18,7 +18,7 @@ apply plugin: 'io.spring.dependency-management'
 
 
 group 'com.sersue.book'
-version '1.0.2-SNAPSHOT'
+version '1.0.2-SNAPSHOT'+new Date().format("yyyyMMddHHmmss")
 sourceCompatibility = 1.8
 
 repositories {

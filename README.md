@@ -50,7 +50,6 @@
 <img width="1431" alt="스크린샷 2021-01-30 오후 4 49 53" src="https://user-images.githubusercontent.com/42709887/106350821-30449580-631b-11eb-8ae9-a65fa1c48504.png">
 
 (OAuth2 프로세스 참고)
-
 <a href ="https://developers.payco.com/guide/development/start"> 출처 : OAuth2 페이코 로그인 가이드</a>
 <img width="601" alt="스크린샷 2021-01-30 오후 4 52 19" src="https://user-images.githubusercontent.com/42709887/106350870-8580a700-631b-11eb-8803-933c434ed3f8.png">
 
@@ -65,4 +64,25 @@
 - Java 8 설치 & 타임 존 변경 & Hostname 변경
 
 
+<h2>EC2 서버에 배포 (완료)</h2>
+
+- 배포 스크립트(.sh)
+- 외부 security 파일 등록 (보안상 서버에서 직접 가지고 있도록)
+- RDS profile
  
+ <h2>배포 자동화 (완료)</h2>
+
+- Travis CI - S3 - CodeDeploy 연동
+
+(Travis CI)
+<img width="973" alt="스크린샷 2021-02-04 오전 12 08 28" src="https://user-images.githubusercontent.com/42709887/106766314-1d182980-667d-11eb-8061-57135a107776.png">
+
+(S3)
+<img width="916" alt="스크린샷 2021-02-01 오후 7 39 57" src="https://user-images.githubusercontent.com/42709887/106766206-fa861080-667c-11eb-82c3-3cb3924d3379.png">
+
+
+ <h2>무중단배포 (완료)</h2>
+
+ - Nginx 리버스 프록시 사용
+ - Nginx 1대, 스프링부트 Jar 2대 사용
+ - Nginx는 80번 포트, 스프링은 각각 8081, 8082 사용
