@@ -5,11 +5,6 @@
     - JAVA 8(JDK 1.8)
     - Gradle 4.8 ~ Gradle 4.10.2
 
-- 소스코드 구성  
-    - main  
-<img width="410" alt="스크린샷 2021-01-30 오후 4 39 14" src="https://user-images.githubusercontent.com/42709887/106350598-b19b2880-6319-11eb-8bf5-411b942385a1.png">
-    - Test 코드  
-<img width="417" alt="스크린샷 2021-01-30 오후 4 39 29" src="https://user-images.githubusercontent.com/42709887/106350603-b9f36380-6319-11eb-8b5e-aa0fa4577d73.png">
 
 <h2>StringBoot JPA</h2>
 - Local H2 데이터베이스 사용   
